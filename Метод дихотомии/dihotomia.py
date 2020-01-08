@@ -1,7 +1,7 @@
 #coding: utf-8
 from math import *
 from tkinter import *
-w = 600; h = 600
+w = 500; h = 500
 root = Tk()
 root.title("Вычисление экстремума функции методом дихотомии")
 
@@ -15,7 +15,7 @@ pn_graph.pack()
 canv = Canvas(root, width=w, height=h)
 canv.pack()
 
-dw = (w/100)*6 #-- цена деления по оси абцисс
+dw = 30 #-- цена деления по оси абцисс
 dh = dw    #-- цена деления по оси ординат
 zw = dw #-- начало координат по оси абцисс
 zh = dh*15    #-- начало координат по оси ординат
@@ -31,8 +31,8 @@ dt=16
 while t<dt:
     canv.create_line(zw+(dw*t), zh+5, zw+(dw*t), zh-5, fill='black', dash=4)
     canv.create_text(zw+(dw*t)+10, zh+10, text=str(t), font=('Times New Roman', 10))
-    canv.create_line(dw-5, zh-(dh*t), dw+5, zh-(dh*t), fill='black', dash=4)
-    canv.create_text(zw-10, zh-(dw*t)-10, text=str(t*10), font=('Times New Roman', 10))
+    canv.create_line(zw-5, zh-(t*30), zw+5, zh-(t*30), fill='black', dash=4)
+    canv.create_text(zw-10, zh-(t*30)-10, text=str(t*30), font=('Times New Roman', 10))
     t += 1
 
 lb_txt = Label(pn_control, text=u"Введите начальную и конечную точки и точность вычисления и кликните левой кнопкой мыши")
@@ -99,8 +99,8 @@ def listener(event):
                 fx = calc(p,x_zv)
                 canv.create_line(zw, fx, zw+(dw*x_zv), fx, fill='black', dash=4)
                 fx_txt = pow(2*p*(x_zv-10),2)+5
-                canv.create_text(dw*9, dh*5, text='x* = min{x : f('+str(a)+'), f('+str(b)+')}', font=('Times New Roman', 14))
-                canv.create_text(dw*9, dh*6, text='x* = '+str(x_zv)+', f(x*) = '+str(fx_txt)+', n = '+str(n), font=('Times New Roman', 14))
+                canv.create_text(dw*9.5, dh*5, text='x* = min{x : f('+str(a)+'), f('+str(b)+')}', font=('Times New Roman', 14))
+                canv.create_text(dw*9.5, dh*6, text='x* = '+str(x_zv)+', f(x*) = '+str(fx_txt)+', n = '+str(n), font=('Times New Roman', 14))
                 work_stop = False
 
 canv.bind('<Button-1>', listener)
