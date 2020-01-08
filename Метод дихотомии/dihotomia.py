@@ -98,10 +98,9 @@ def listener(event):
                 x_zv = (a+b)/2
                 fx = calc(p,x_zv)
                 canv.create_line(dw+(dw*x_zv), zh, dw+(dw*x_zv), fx, fill='black', dash=4)
-                canv.create_line(dw, fx, dw+(dw*x_zv), fx, fill='black', dash=4)
                 fx_txt = pow(2*p*(x_zv-10),2)+5
                 canv.create_text(dw*9, dh*5, text='x* = min{x : f('+str(a)+'), f('+str(b)+')}', font=('Times New Roman', 14))
-                canv.create_text(dw*9, dh*6, text='x* = '+str(x_zv)+', f('+str(fx_txt)+'), n = '+str(n), font=('Times New Roman', 14))
+                canv.create_text(dw*9, dh*6, text='x* = '+str(x_zv)+', f(x*) = '+str(fx_txt)+', n = '+str(n), font=('Times New Roman', 14))
                 work_stop = False
 
 canv.bind('<Button-1>', listener)
