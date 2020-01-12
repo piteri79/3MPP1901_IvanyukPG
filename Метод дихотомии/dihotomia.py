@@ -15,8 +15,8 @@ pn_graph.pack()
 canv = Canvas(root, width=w, height=h)
 canv.pack()
 
-dw = 30 #-- цена деления по оси абцисс
-dh = dw    #-- цена деления по оси ординат
+dw = (w/100)*6 #-- цена деления по оси абцисс
+dh = (h/100)*6    #-- цена деления по оси ординат
 zw = dw #-- начало координат по оси абцисс
 zh = dh*15    #-- начало координат по оси ординат
 
@@ -60,14 +60,14 @@ n = 0
 work_stop = True
 
 def calc(p,xx):
-    return zh-(pow(2*p*(xx-10),2)+5)
+    return pow(2*p*(xx-10),2)
 
 #-- Рисуем график функции
-xg=2; p=1
-yg=zh-(pow(2*p*(xg-10),2)+5);
-for xx in range(2,16, 1):
-    yy = zh-(pow(2*p*(xx-10),2)+5)
-    canv.create_line(xg*dw+zw, yg, xx*dw+zw, yy, fill='blue')
+xg = 2; p = 1
+yg = zh-calc(p,xg)
+for xx in range(xg,16, 1):
+    yy = zh-calc(p,xx)
+    canv.create_line(zw+xg*dw, yg, zw+xx*dw, yy, fill='blue')
     xg = xx; yg = yy
 canv.create_text(dw*14, dh*1.3, text='y  = 2px', font=('Times New Roman', 24))
 canv.create_text(dw*13.2, dh, text='2', font=('Times New Roman', 12))
@@ -93,14 +93,12 @@ def listener(event):
                     x1 = (a+b-(eps/2))/2
                     x2 = (a+b+(eps/2))/2
                     n = n + 1
-                    if calc(p,x2) < calc(p,x1): b = x2
-                    elif calc(p,x2) > calc(p,x1): a = x1
+                    if calc(p,x2) > calc(p,x1): b = x2
+                    elif calc(p,x2) < calc(p,x1): a = x1
                 x_zv = (a+b)/2
                 fx = calc(p,x_zv)
-                canv.create_line(zw, fx, zw+(dw*x_zv), fx, fill='black', dash=4)
-                fx_txt = pow(2*p*(x_zv-10),2)+5
                 canv.create_text(dw*9.5, dh*5, text='x* = min{x : f('+str(a)+'), f('+str(b)+')}', font=('Times New Roman', 14))
-                canv.create_text(dw*9.5, dh*6, text='x* = '+str(x_zv)+', f(x*) = '+str(fx_txt)+', n = '+str(n), font=('Times New Roman', 14))
+                canv.create_text(dw*9.5, dh*6, text='x* = '+str(x_zv)+', f(x*) = '+str(fx)+', n = '+str(n), font=('Times New Roman', 14))
                 work_stop = False
 
 canv.bind('<Button-1>', listener)
