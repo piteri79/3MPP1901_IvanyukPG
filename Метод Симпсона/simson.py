@@ -48,11 +48,6 @@ lb_b.pack(side = 'left')
 ed_b = Entry(pn_control, width = 4)
 ed_b.pack(side = 'left')
 
-lb_eps = Label(pn_control, text=u"Точность эпсилон")
-lb_eps.pack(side = 'left')
-ed_eps = Entry(pn_control, width = 4)
-ed_eps.pack(side = 'left')
-
 #-- Остановка обработки события мыши
 work_stop = True
 
@@ -72,11 +67,11 @@ canv.create_text(dw*14, dh*1.3, text='y = sin(x)', font=('Times New Roman', 24))
 def listener(event):
     global n,work_stop
     if work_stop == True:
-        ed_a.configure(state="disabled"); ed_b.configure(state="disabled"); ed_eps.configure(state="disabled")
-        a = ed_a.get(); b = ed_b.get(); eps = ed_eps.get()
-        if a != '' and b != '' and eps != '':
-            a = int(a); b = int(b); eps = int(eps);
-            if a>0 and a<dt and b>0 and b<dt and eps>0 and eps<dt:
+        ed_a.configure(state="disabled"); ed_b.configure(state="disabled")
+        a = ed_a.get(); b = ed_b.get()
+        if a != '' and b != '':
+            a = int(a); b = int(b)
+            if a>0 and a<dt and b>0 and b<dt:
                 #-- Счётчик количества итераций
                 n = 1; S = 0
                 S0 = S; n = 2*n
