@@ -26,7 +26,7 @@ SECRET_KEY = '7+2@i^)%9*(j5i(i-nut=b#kvdm98ed@4-yx3&&30vih#m%9rn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.181','89.19.178.129']
 
 
 # Application definition
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'firstwebpage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
         'NAME':os.path.join(BASE_DIR, 'flatbase')
     }
 }
